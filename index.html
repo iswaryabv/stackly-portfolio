@@ -145,6 +145,16 @@
         showPage("error");
       }
     }
+
+    // Show correct page on initial load based on URL hash (#signup or #login)
+    document.addEventListener("DOMContentLoaded", function () {
+      const hash = window.location.hash.replace("#", "");
+      if (hash === "signup") {
+        showPage("signup");
+      } else {
+        showPage("login");
+      }
+    });
   </script>
 
   <!-- ================= SIGNUP PAGE ================= -->
@@ -307,7 +317,7 @@
               Already have an account?
               <button
                 type="button"
-                onclick="showPage('login')"
+                onclick="location.hash='login'; showPage('login')"
                 class="text-yellow-400 cursor-pointer hover:text-yellow-300 underline-offset-2"
               >
                 Login
@@ -508,7 +518,7 @@
               Don't have an account?
               <button
                 type="button"
-                onclick="showPage('signup')"
+                onclick="location.hash='signup'; showPage('signup')"
                 class="text-white cursor-pointer hover:text-yellow-300 underline-offset-2"
               >
                 SignUp
@@ -530,7 +540,7 @@
       Please try again later.
     </p>
     <button
-      onclick="showPage('login')"
+      onclick="location.hash='login'; showPage('login')"
       class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
     >
       Go Back
