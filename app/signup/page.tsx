@@ -205,26 +205,24 @@ export default function SignupPage() {
 
                   <div className="flex flex-col">
                     <div className="flex items-center border-b border-white/80 pb-2 relative">
-                      <FaLock className="mr-3 text-sm text-white/90" />
+                      <FaLock className="mr-3 text-sm text-white/90 flex-shrink-0" />
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Password"
                         value={form.password}
                         onChange={handleChange("password")}
-                        className="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-10"
+                        className="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-9"
                         aria-invalid={!!errors.password}
                         aria-describedby={errors.password ? "password-error" : undefined}
                       />
-                      {/[a-zA-Z0-9]/.test(form.password) && (
-                        <button
-                          type="button"
-                          aria-label="Toggle password visibility"
-                          className="absolute right-0 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1"
-                          onClick={() => setShowPassword((p) => !p)}
-                        >
-                          {showPassword ? <FaEyeSlash className="text-sm" /> : <FaEye className="text-sm" />}
-                        </button>
-                      )}
+                      <button
+                        type="button"
+                        aria-label="Toggle password visibility"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1 flex-shrink-0"
+                        onClick={() => setShowPassword((p) => !p)}
+                      >
+                        {showPassword ? <FaEyeSlash className="text-sm" /> : <FaEye className="text-sm" />}
+                      </button>
                     </div>
                     <p className="text-[10px] sm:text-xs text-white/80 mt-0.5 leading-tight">
                       Password must: at least 6 characters • a number • an uppercase letter • a special character (!@#$%^&*).
@@ -238,26 +236,24 @@ export default function SignupPage() {
 
                   <div className="flex flex-col">
                     <div className="flex items-center border-b border-white/80 pb-2 relative">
-                      <FaLock className="mr-3 text-sm text-white/90" />
+                      <FaLock className="mr-3 text-sm text-white/90 flex-shrink-0" />
                       <input
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="Confirm Password"
                         value={form.confirmPassword}
                         onChange={handleChange("confirmPassword")}
-                        className="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-10"
+                        className="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-9"
                         aria-invalid={!!errors.confirmPassword}
                         aria-describedby={errors.confirmPassword ? "confirmPassword-error" : undefined}
                       />
-                      {/[a-zA-Z0-9]/.test(form.confirmPassword) && (
-                        <button
-                          type="button"
-                          aria-label="Toggle confirm password visibility"
-                          className="absolute right-0 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1"
-                          onClick={() => setShowConfirmPassword((p) => !p)}
-                        >
-                          {showConfirmPassword ? <FaEyeSlash className="text-sm" /> : <FaEye className="text-sm" />}
-                        </button>
-                      )}
+                      <button
+                        type="button"
+                        aria-label="Toggle confirm password visibility"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1 flex-shrink-0"
+                        onClick={() => setShowConfirmPassword((p) => !p)}
+                      >
+                        {showConfirmPassword ? <FaEyeSlash className="text-sm" /> : <FaEye className="text-sm" />}
+                      </button>
                     </div>
                     {errors.confirmPassword && (
                       <p id="confirmPassword-error" className="auth-error-text mt-0.5 text-[11px] sm:text-xs">

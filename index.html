@@ -710,15 +710,15 @@
 
               <div>
                 <div id="signupPasswordWrap" class="flex items-center border-b border-white/80 pb-2 password-toggle-hidden relative">
-                  <i class="fa-solid fa-lock mr-3 text-sm text-white/90"></i>
+                  <i class="fa-solid fa-lock mr-3 text-sm text-white/90 flex-shrink-0"></i>
                   <input
                     id="signupPassword"
                     type="password"
                     placeholder="Password"
-                    class="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-10"
+                    class="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-9"
                     oninput="updateSignupPasswordToggleVisibility()"
                   />
-                  <button type="button" aria-label="Toggle password visibility" class="password-toggle-btn absolute right-0 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1" onclick="toggleSignupPasswordVisibility()">
+                  <button type="button" aria-label="Toggle password visibility" class="password-toggle-btn absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1 flex-shrink-0" onclick="toggleSignupPasswordVisibility()">
                     <i id="signupPasswordToggle" class="fa-solid fa-eye text-sm"></i>
                   </button>
                 </div>
@@ -730,15 +730,15 @@
 
               <div>
                 <div id="signupConfirmPasswordWrap" class="flex items-center border-b border-white/80 pb-2 password-toggle-hidden relative">
-                  <i class="fa-solid fa-lock mr-3 text-sm text-white/90"></i>
+                  <i class="fa-solid fa-lock mr-3 text-sm text-white/90 flex-shrink-0"></i>
                   <input
                     id="signupConfirmPassword"
                     type="password"
                     placeholder="Confirm Password"
-                    class="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-10"
+                    class="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white pr-9"
                     oninput="updateSignupConfirmPasswordToggleVisibility()"
                   />
-                  <button type="button" aria-label="Toggle confirm password visibility" class="password-toggle-btn absolute right-0 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1" onclick="toggleSignupConfirmPasswordVisibility()">
+                  <button type="button" aria-label="Toggle confirm password visibility" class="password-toggle-btn absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white p-1 flex-shrink-0" onclick="toggleSignupConfirmPasswordVisibility()">
                     <i id="signupConfirmPasswordToggle" class="fa-solid fa-eye text-sm"></i>
                   </button>
                 </div>
@@ -1168,7 +1168,7 @@
               <label for="newPassword" class="block text-[13px] sm:text-[14px] mb-2" style="color: #FFFFFF;">New Password</label>
               <div class="relative">
                 <input id="newPassword" type="password" placeholder="••••••••" class="w-full h-12 pl-4 pr-12 rounded border text-[14px] outline-none focus:border-white/80 transition bg-transparent" style="border: 1px solid rgba(255,255,255,0.5); color: #FFFFFF;" />
-                <button type="button" onclick="toggleNewPasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Show password">
+                <button type="button" onclick="toggleNewPasswordVisibility()" class="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white flex-shrink-0" aria-label="Show password">
                   <i id="newPasswordToggle" class="fa-solid fa-eye text-sm"></i>
                 </button>
               </div>
@@ -1177,7 +1177,7 @@
               <label for="confirmPassword" class="block text-[13px] sm:text-[14px] mb-2" style="color: #FFFFFF;">Confirm Password</label>
               <div class="relative">
                 <input id="confirmPassword" type="password" placeholder="••••••••" class="w-full h-12 pl-4 pr-12 rounded border text-[14px] outline-none focus:border-white/80 transition bg-transparent" style="border: 1px solid rgba(255,255,255,0.5); color: #FFFFFF;" />
-                <button type="button" onclick="toggleConfirmPasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white" aria-label="Show password">
+                <button type="button" onclick="toggleConfirmPasswordVisibility()" class="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white flex-shrink-0" aria-label="Show password">
                   <i id="confirmPasswordToggle" class="fa-solid fa-eye text-sm"></i>
                 </button>
               </div>
