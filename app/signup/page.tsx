@@ -81,13 +81,17 @@ export default function SignupPage() {
     } else if (values.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters.";
     } else {
-      if (!/[a-z]/.test(values.password)) {
+      const hasLower = /[a-z]/.test(values.password);
+      const hasUpper = /[A-Z]/.test(values.password);
+      const hasNumber = /[0-9]/.test(values.password);
+      const hasSpecial = /[!@#$%^&*(),.?\x3a{}|<>]/.test(values.password);
+      if (!hasLower) {
         newErrors.password = "Password must include a lowercase letter.";
-      } else if (!/[A-Z]/.test(values.password)) {
+      } else if (!hasUpper) {
         newErrors.password = "Password must include an uppercase letter.";
-      } else if (!/[0-9]/.test(values.password)) {
+      } else if (!hasNumber) {
         newErrors.password = "Password must include a number.";
-      } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(values.password)) {
+      } else if (!hasSpecial) {
         newErrors.password = "Password must include a special character (!@#$%^&* etc.).";
       }
     }

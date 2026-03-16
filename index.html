@@ -387,16 +387,20 @@
         passwordError.innerText = "Password must be at least 8 characters";
         valid = false;
       } else {
-        if (!/[a-z]/.test(password)) {
+        var hasLower = /[a-z]/.test(password);
+        var hasUpper = /[A-Z]/.test(password);
+        var hasNumber = /[0-9]/.test(password);
+        var hasSpecial = /[!@#$%^&*(),.?\x3a{}|<>]/.test(password);
+        if (!hasLower) {
           passwordError.innerText = "Password must include a lowercase letter";
           valid = false;
-        } else if (!/[A-Z]/.test(password)) {
+        } else if (!hasUpper) {
           passwordError.innerText = "Password must include an uppercase letter";
           valid = false;
-        } else if (!/[0-9]/.test(password)) {
+        } else if (!hasNumber) {
           passwordError.innerText = "Password must include a number";
           valid = false;
-        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        } else if (!hasSpecial) {
           passwordError.innerText = "Password must include a special character (!@#$%^&* etc.)";
           valid = false;
         }
