@@ -327,16 +327,16 @@ export default function SignupPage() {
               </form>
 
               <div className="flex-shrink-0 mt-2">
-                <p className="text-center text-xs mt-1 text-white/80">
+                <p className="text-center text-xs mt-1.5 text-white/80">
                   Already have an account?{" "}
                   <Link href="/login" className="text-amber-300 hover:text-amber-200 font-medium">
                     Login
                   </Link>
                 </p>
 
-                <div className="my-1.5 border-t border-white/50" />
+                <div className="my-1 border-t border-white/50" />
 
-                <div className="pt-0.5 pb-2 sm:pt-1 sm:pb-4">
+                <div className="pt-0 pb-2 sm:pt-0.5 sm:pb-3">
                   <a
                     href={
                       "https://accounts.google.com/o/oauth2/v2/auth" +
