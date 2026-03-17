@@ -168,20 +168,21 @@ export default function SignupPage() {
             <div className="pointer-events-none absolute inset-0 rounded-[10px] shadow-[inset_20px_0_45px_rgba(0,0,0,0.55),inset_-20px_0_45px_rgba(0,0,0,0.55)]" />
             <div className="pointer-events-none absolute inset-0 rounded-[10px] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.25)]" />
 
-            <div className="relative z-10 flex flex-col flex-1 min-h-0 min-w-0 px-4 sm:px-6 pt-2.5 sm:pt-4 pb-2 sm:pb-3 lg:pt-8 lg:pb-6 text-white signup-card-content text-left">
-              <div className="w-full flex justify-center flex-shrink-0">
-                <h1 className="font-welcome-heading text-xl sm:text-2xl text-center font-semibold mb-1.5 sm:mb-2.5 lg:mb-4 tracking-widest">
-                  WELCOME
-                </h1>
-              </div>
-
-              <div className="flex justify-center mb-1.5 sm:mb-2.5 lg:mb-4 flex-shrink-0">
-                <div className="bg-white w-[120px] sm:w-[140px] lg:w-[180px] h-[44px] sm:h-[52px] lg:h-[64px] rounded-[50%] flex items-center justify-center shadow-lg overflow-hidden">
-                  <img src="/stackly-logo.webp" alt="Stackly Logo" className="h-3.5 sm:h-4 lg:h-7 object-contain" />
+            <div className="relative z-10 flex flex-col flex-1 min-h-0 min-w-0 px-4 sm:px-6 pt-2.5 sm:pt-4 pb-2 sm:pb-3 lg:pt-8 lg:pb-6 text-white signup-card-content text-left justify-center">
+              <div className="min-h-0">
+                <div className="w-full flex justify-center flex-shrink-0">
+                  <h1 className="font-welcome-heading text-xl sm:text-2xl text-center font-semibold mb-1.5 sm:mb-2.5 lg:mb-4 tracking-widest">
+                    WELCOME
+                  </h1>
                 </div>
-              </div>
 
-              <form onSubmit={handleSignup} noValidate>
+                <div className="flex justify-center mb-1.5 sm:mb-2.5 lg:mb-4 flex-shrink-0">
+                  <div className="bg-white w-[120px] sm:w-[140px] lg:w-[180px] h-[44px] sm:h-[52px] lg:h-[64px] rounded-[50%] flex items-center justify-center shadow-lg overflow-hidden">
+                    <img src="/stackly-logo.webp" alt="Stackly Logo" className="h-3.5 sm:h-4 lg:h-7 object-contain" />
+                  </div>
+                </div>
+
+                <form onSubmit={handleSignup} noValidate>
                 <div className="space-y-1.5 sm:space-y-2.5 lg:space-y-3 flex-shrink-0">
                   <div className="flex flex-col">
                     <div className="flex items-center border-b border-white/80 pb-2">
@@ -324,33 +325,36 @@ export default function SignupPage() {
                 >
                   {isSubmitting ? "Checking..." : "Sign Up"}
                 </button>
-              </form>
+                </form>
+              </div>
 
-              <p className="text-center text-xs mt-1.5 text-white/80 flex-shrink-0">
-                Already have an account?{" "}
-                <Link href="/login" className="text-amber-300 hover:text-amber-200 font-medium">
-                  Login
-                </Link>
-              </p>
+              <div className="flex-shrink-0">
+                <p className="text-center text-xs mt-1.5 text-white/80">
+                  Already have an account?{" "}
+                  <Link href="/login" className="text-amber-300 hover:text-amber-200 font-medium">
+                    Login
+                  </Link>
+                </p>
 
-              <div className="my-1.5 border-t border-white/50 flex-shrink-0" />
+                <div className="my-1.5 border-t border-white/50" />
 
-              <div className="flex-shrink-0 pt-0.5 pb-2 sm:pt-1 sm:pb-4">
-                <a
-                  href={
-                    "https://accounts.google.com/o/oauth2/v2/auth" +
-                    "?client_id=703831654489-m34p97it8cppn924006cgt8u6jgk9tsa.apps.googleusercontent.com" +
-                    "&redirect_uri=http://localhost:5000/api/auth/google" +
-                    "&response_type=code" +
-                    "&scope=openid%20email%20profile" +
-                    "&access_type=online" +
-                    "&prompt=select_account"
-                  }
-                  className="w-full h-[42px] border border-white/80 rounded-md flex items-center justify-center text-sm font-medium bg-transparent text-white hover:bg-white hover:text-[#0c2b5a] transition"
-                >
-                  <FcGoogle className="mr-3 text-lg" />
-                  Sign up with Google
-                </a>
+                <div className="pt-0.5 pb-2 sm:pt-1 sm:pb-4">
+                  <a
+                    href={
+                      "https://accounts.google.com/o/oauth2/v2/auth" +
+                      "?client_id=703831654489-m34p97it8cppn924006cgt8u6jgk9tsa.apps.googleusercontent.com" +
+                      "&redirect_uri=http://localhost:5000/api/auth/google" +
+                      "&response_type=code" +
+                      "&scope=openid%20email%20profile" +
+                      "&access_type=online" +
+                      "&prompt=select_account"
+                    }
+                    className="w-full h-[42px] border border-white/80 rounded-md flex items-center justify-center text-sm font-medium bg-transparent text-white hover:bg-white hover:text-[#0c2b5a] transition"
+                  >
+                    <FcGoogle className="mr-3 text-lg" />
+                    Sign up with Google
+                  </a>
+                </div>
               </div>
             </div>
           </div>

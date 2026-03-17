@@ -131,25 +131,26 @@ export default function LoginPage() {
             <div className="pointer-events-none absolute inset-0 rounded-[10px] shadow-[inset_20px_0_45px_rgba(0,0,0,0.55),inset_-20px_0_45px_rgba(0,0,0,0.55)]" />
             <div className="pointer-events-none absolute inset-0 rounded-[10px] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.25)]" />
 
-            <div className="relative z-10 flex flex-col flex-1 min-h-0 min-w-0 auth-card-content login-card-inner px-4 sm:px-6 pt-2.5 sm:pt-8 pb-2 sm:pb-6 lg:pt-14 lg:pb-10 text-white text-left">
-              <div className="w-full flex justify-center flex-shrink-0 min-w-0">
-                <h1 className="font-welcome-heading text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-1 sm:mb-4 lg:mb-7 break-words tracking-widest">
-                  WELCOME
-                </h1>
-              </div>
-
-              <div className="flex justify-center mb-1 sm:mb-4 lg:mb-8 flex-shrink-0">
-                <div className="bg-white w-[120px] h-[44px] sm:w-[160px] sm:h-[60px] lg:w-[200px] lg:h-[80px] rounded-[50%] flex items-center justify-center shadow-lg overflow-hidden">
-                  <img
-                    src="/stackly-logo.webp"
-                    alt="Stackly Logo"
-                    className="h-4 sm:h-5 lg:h-8 object-contain"
-                  />
+            <div className="relative z-10 flex flex-col flex-1 min-h-0 min-w-0 auth-card-content login-card-inner px-4 sm:px-6 pt-2.5 sm:pt-8 pb-2 sm:pb-6 lg:pt-14 lg:pb-10 text-white text-left justify-center">
+              <div className="min-h-0">
+                <div className="w-full flex justify-center flex-shrink-0 min-w-0">
+                  <h1 className="font-welcome-heading text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-1 sm:mb-4 lg:mb-7 break-words tracking-widest">
+                    WELCOME
+                  </h1>
                 </div>
-              </div>
 
-              <form onSubmit={handleLogin} noValidate>
-                <div className="space-y-2 sm:space-y-4 lg:space-y-6 flex-shrink-0">
+                <div className="flex justify-center mb-1 sm:mb-4 lg:mb-8 flex-shrink-0">
+                  <div className="bg-white w-[120px] h-[44px] sm:w-[160px] sm:h-[60px] lg:w-[200px] lg:h-[80px] rounded-[50%] flex items-center justify-center shadow-lg overflow-hidden">
+                    <img
+                      src="/stackly-logo.webp"
+                      alt="Stackly Logo"
+                      className="h-4 sm:h-5 lg:h-8 object-contain"
+                    />
+                  </div>
+                </div>
+
+                <form onSubmit={handleLogin} noValidate>
+                  <div className="space-y-2 sm:space-y-4 lg:space-y-6 flex-shrink-0">
                   <div className="flex flex-col">
                     <div className="flex items-center border-b border-white/60 pb-2 min-w-0">
                       <FaEnvelope className="mr-2 sm:mr-4 text-sm opacity-80 flex-shrink-0" />
@@ -271,21 +272,19 @@ export default function LoginPage() {
                   </p>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="mt-2 sm:mt-6 lg:mt-8 w-full h-[42px] sm:h-[45px] bg-gradient-to-r from-[#2d8cf0] to-[#5a78c7] rounded-md text-sm font-medium shadow-md hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed flex-shrink-0"
-                >
-                  {isSubmitting ? "Checking..." : "Login"}
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="mt-2 sm:mt-6 lg:mt-8 w-full h-[42px] sm:h-[45px] bg-gradient-to-r from-[#2d8cf0] to-[#5a78c7] rounded-md text-sm font-medium shadow-md hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed flex-shrink-0"
+                  >
+                    {isSubmitting ? "Checking..." : "Login"}
+                  </button>
+                </form>
+              </div>
 
               <p className="text-center text-xs mt-1.5 sm:mt-2 text-white/80 flex-shrink-0">
                 Don&apos;t have an account?{" "}
-                <Link
-                  href="/signup"
-                  className="text-yellow-400 hover:text-yellow-300 font-medium"
-                >
+                <Link href="/signup" className="text-yellow-400 hover:text-yellow-300 font-medium">
                   Sign Up
                 </Link>
               </p>
