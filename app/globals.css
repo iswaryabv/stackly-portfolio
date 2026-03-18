@@ -168,16 +168,21 @@ input[type="password"]::-ms-reveal {
   display: block;
 }
 
-/* Mobile: keep content visually inside inner light panel */
+/* Mobile: inner panel = 86% of card; content must match so it sits inside the “inner box” */
 @media (max-width: 500px) {
   .auth-inner-panel {
     width: 86% !important;
   }
+  /* Match content width to inner panel: 86% of card (content area is card minus px-6 padding) */
   .login-card-inner,
   .signup-card-content {
-    max-width: 86%;
+    width: calc(86% + 41.28px);
+    max-width: calc(86% + 41.28px);
     margin-left: auto;
     margin-right: auto;
+    min-width: 0;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 }
 

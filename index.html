@@ -148,16 +148,20 @@
       display: block;
     }
 
-    /* Mobile: keep content visually inside inner light panel */
+    /* Mobile: inner panel = 86% of card; content must match so it sits inside the inner box */
     @media (max-width: 500px) {
       .auth-inner-panel {
         width: 86% !important;
       }
       #loginPage .login-card-inner,
       #signupPage .signup-card-content {
-        max-width: 86%;
+        width: calc(86% + 41.28px);
+        max-width: calc(86% + 41.28px);
         margin-left: auto;
         margin-right: auto;
+        min-width: 0;
+        overflow: hidden;
+        box-sizing: border-box;
       }
     }
 
