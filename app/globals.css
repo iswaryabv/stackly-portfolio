@@ -248,28 +248,30 @@ input[type="password"]::-ms-reveal {
 /* Mobile: allow outer (page) scroll so no content is missing, with consistent card size */
 @media (max-width: 1023px) {
   .auth-page {
-    /* Use dynamic viewport units to avoid bottom white gap on mobile browsers */
-    min-height: 100dvh;
     height: 100dvh;
+    min-height: 100dvh;
     max-height: none;
     overflow: visible;
     overflow-x: hidden;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   .auth-page .auth-layout {
     flex: 1;
-    min-height: 0;
-    max-height: 100%;
+    min-height: 100%;
+    max-height: none;
     gap: 0.75rem;
     max-width: 100%;
     justify-content: center;
-    align-content: center;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
   .auth-form-card {
     width: 100%;
     max-width: 360px;       /* same width on login & signup */
-    min-height: 560px;      /* keep login/signup same height baseline on mobile */
-    /* Fit within viewport height to remove bottom white space (still grows on scroll when needed) */
-    max-height: calc(100dvh - 1.5rem);
+    min-height: min(560px, 100dvh);
+    height: 100%;
+    max-height: none;
     display: flex;
     flex-direction: column;
     margin-top: 0;
