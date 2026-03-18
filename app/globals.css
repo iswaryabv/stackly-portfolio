@@ -249,13 +249,14 @@ input[type="password"]::-ms-reveal {
 @media (max-width: 1023px) {
   .auth-page {
     /* Fill the mobile viewport (no extra bottom white), with small top/bottom whitespace */
-    --auth-mobile-vpad: clamp(12px, 2.5vh, 22px);
+    /* ~1.5cm white space top/bottom (requested) */
+    --auth-mobile-vpad: 1.5cm;
     height: 100dvh;
     min-height: 100dvh;
     max-height: 100dvh;
     padding-top: var(--auth-mobile-vpad);
     padding-bottom: var(--auth-mobile-vpad);
-    overflow: hidden;
+    overflow: hidden; /* no outer page scroll */
     overflow-x: hidden;
   }
   .auth-page .auth-layout {
@@ -277,7 +278,7 @@ input[type="password"]::-ms-reveal {
     flex-direction: column;
     margin-top: 0;
     margin-bottom: 0;
-    overflow: hidden;       /* no scrollbars in mobile */
+    overflow: hidden;       /* no inner scrollbars */
   }
   .auth-form-card .auth-card-content,
   .auth-form-card .signup-card-content {
@@ -287,7 +288,7 @@ input[type="password"]::-ms-reveal {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow: hidden;
+    overflow: hidden;       /* no inner scroll; must fit within card */
   }
 
   /* Mobile: remove bottom illustration entirely */
