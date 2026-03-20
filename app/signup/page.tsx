@@ -111,7 +111,11 @@ export default function SignupPage() {
   const handleChange =
     (field: keyof SignupFormState) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+      let value = event.target.value;
+      // Keep mobile number numeric only at input-level (no alphabets).
+      if (field === "mobileNumber") {
+        value = value.replace(/\D/g, "").slice(0, 10);
+      }
       setForm((prev) => ({ ...prev, [field]: value }));
       setErrors((prev) => ({ ...prev, [field]: undefined, form: undefined }));
     };
@@ -230,6 +234,7 @@ export default function SignupPage() {
                       <input
                         type="tel"
                         inputMode="numeric"
+                        maxLength={10}
                         placeholder="Mobile number"
                         value={form.mobileNumber}
                         onChange={handleChange("mobileNumber")}

@@ -1161,6 +1161,8 @@
                     id="signupMobile"
                     type="tel"
                     inputmode="numeric"
+                    maxlength="10"
+                    oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10);"
                     placeholder="Mobile number"
                     class="bg-transparent outline-none w-full placeholder-white/90 text-sm text-white min-w-0"
                   />
