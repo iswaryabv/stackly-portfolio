@@ -342,20 +342,12 @@
         padding-top: var(--auth-mobile-vpad);
         padding-bottom: var(--auth-mobile-vpad);
         /* Allow text-size scaling (+/-) to update layout on iOS Chrome. */
-        overflow-y: visible;
+        overflow-y: auto;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
         /* Allow iOS Chrome "Text size" (+/-) on auth pages */
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-      /* Extra safety: Login/Signup sometimes get stronger iOS text-size rules from inner elements */
-      .login-page,
-      .signup-page,
-      .login-page *,
-      .signup-page * {
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
+        -webkit-text-size-adjust: auto;
+        text-size-adjust: auto;
       }
       .auth-page .auth-layout {
         flex: 1;
@@ -401,8 +393,8 @@
           min-height: 100svh;
           max-height: none;
             /* Allow iOS Chrome +/- zoom buttons (text scaling). */
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
+            -webkit-text-size-adjust: auto;
+            text-size-adjust: auto;
         }
         .auth-form-card {
           height: auto;
@@ -415,7 +407,7 @@
         #signupPage .signup-confirm-input {
           font-size: 12px !important;
             /* Allow Chrome iOS "Text size" +/- scaling on login/signup pages */
-          -webkit-text-size-adjust: 100%;
+          -webkit-text-size-adjust: auto;
           white-space: nowrap;
         }
         #loginPage .login-email-input::placeholder {
@@ -1116,7 +1108,7 @@
   </script>
 
   <!-- ================= SIGNUP PAGE ================= -->
-  <div id="signupPage" class="hidden signup-page auth-page min-h-screen bg-white flex flex-col px-3 sm:px-6 py-3 sm:py-4 overflow-y-visible sm:overflow-y-auto">
+  <div id="signupPage" class="hidden signup-page auth-page min-h-screen bg-white flex flex-col px-3 sm:px-6 py-3 sm:py-4 overflow-y-auto">
     <div class="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 sm:gap-6 lg:gap-8 auth-layout">
       <!-- CARD FIRST ON MOBILE (TOP), RIGHT ON DESKTOP -->
       <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-2">
@@ -1317,7 +1309,7 @@
   </div>
 
   <!-- ================= LOGIN PAGE ================= -->
-  <div id="loginPage" class="login-page auth-page min-h-screen bg-white flex flex-col px-3 sm:px-6 py-3 sm:py-4 overflow-y-visible sm:overflow-y-auto">
+  <div id="loginPage" class="login-page auth-page min-h-screen bg-white flex flex-col px-3 sm:px-6 py-3 sm:py-4 overflow-y-auto">
     <div class="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 sm:gap-6 lg:gap-8 auth-layout">
       <!-- CARD FIRST ON MOBILE (TOP), RIGHT ON DESKTOP -->
       <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-2">
