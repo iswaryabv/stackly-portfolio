@@ -120,12 +120,13 @@ input[type="password"]::-ms-reveal {
   overflow-x: hidden;
 }
 
-/* Mobile: keep layout natural (no clipping); outer page scroll handles overflow */
+/* Mobile: keep layout natural without relying on outer page scroll */
 @media (max-width: 1023px) {
   .auth-card-content,
   .auth-form-card .auth-card-content,
   .auth-form-card .signup-card-content {
-    overflow: visible !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
 }
 
@@ -139,11 +140,12 @@ input[type="password"]::-ms-reveal {
   .signup-card .auth-card-content,
   .signup-card-content,
   .login-card .auth-card-content {
-    overflow: visible !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
 }
 
-/* Auth pages: desktop = no scroll; mobile = outer scroll so all content visible */
+/* Auth pages: desktop = no scroll; mobile = no outer scroll (card scroll only if needed) */
 .auth-page {
   box-sizing: border-box;
 }
@@ -193,8 +195,8 @@ input[type="password"]::-ms-reveal {
     margin-left: auto;
     margin-right: auto;
     min-width: 0;
-    /* Mobile zoom up to 200%: never clip; let page scroll */
-    overflow: visible !important;
+    /* Prevent horizontal overflow without overriding vertical scroll */
+    overflow-x: hidden !important;
     box-sizing: border-box;
   }
   .login-card-inner form,
@@ -335,17 +337,17 @@ input[type="password"]::-ms-reveal {
   }
 }
 
-/* Mobile: allow outer (page) scroll so no content is missing, with consistent card size */
+/* Mobile: lock auth page height to viewport; remove outer scroll */
 @media (max-width: 1023px) {
   .auth-page {
     /* Fill the mobile viewport (no extra top/bottom white) */
     --auth-mobile-vpad: 0px;
-    height: auto;
-    min-height: 100svh;
-    max-height: none;
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
-    overflow-y: auto;
+    overflow-y: hidden !important; /* remove outer scroll */
     overflow-x: hidden;
   }
   .auth-page .auth-layout {
@@ -394,13 +396,16 @@ input[type="password"]::-ms-reveal {
 @supports (-webkit-touch-callout: none) {
   @media (max-width: 1023px) {
     .auth-page {
-      height: auto;
-      min-height: 100svh;
-      max-height: none;
+      height: 100svh !important;
+      min-height: 100svh !important;
+      max-height: 100svh !important;
+      overflow-y: hidden !important;
     }
     .auth-form-card {
-      height: auto;
-      min-height: 680px;
+      height: calc(
+        100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+      );
+      min-height: 0;
     }
   }
 }

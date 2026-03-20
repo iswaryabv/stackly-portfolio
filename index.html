@@ -104,11 +104,12 @@
       overflow: hidden;
     }
 
-    /* Mobile: keep layout natural (no clipping); outer page scroll handles overflow */
+    /* Mobile: keep layout natural without relying on outer page scroll */
     @media (max-width: 1023px) {
       .auth-form-card .auth-card-content,
       .auth-form-card .signup-card-content {
-        overflow: visible !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
       }
     }
 
@@ -168,7 +169,8 @@
         margin-left: auto;
         margin-right: auto;
         min-width: 0;
-        overflow: visible !important; /* zoom up to 200%: never clip */
+        /* Prevent horizontal overflow without overriding vertical scroll */
+        overflow-x: hidden !important;
         box-sizing: border-box;
       }
       #loginPage .login-card-inner form,
@@ -332,18 +334,17 @@
       }
     }
 
-    /* Mobile: allow outer (page) scroll so no content is missing, with consistent card size */
+    /* Mobile: lock auth page height to viewport; remove outer scroll */
     @media (max-width: 1023px) {
       .auth-page {
         --auth-mobile-vpad: 0px;
-        height: auto;
-        min-height: 100svh;
-        max-height: none;
+        height: 100svh !important;
+        min-height: 100svh !important;
+        max-height: 100svh !important;
         padding-top: env(safe-area-inset-top);
         padding-bottom: env(safe-area-inset-bottom);
-        overflow-y: auto;
+        overflow-y: hidden !important; /* remove outer scroll */
         overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
       }
       .auth-page .auth-layout {
         flex: 1;
@@ -389,13 +390,16 @@
     @supports (-webkit-touch-callout: none) {
       @media (max-width: 1023px) {
         .auth-page {
-          height: auto;
-          min-height: 100svh;
-          max-height: none;
+          height: 100svh !important;
+          min-height: 100svh !important;
+          max-height: 100svh !important;
+          overflow-y: hidden !important;
         }
         .auth-form-card {
-          height: auto;
-          min-height: 680px;
+          height: calc(
+            100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+          );
+          min-height: 0;
         }
       }
     }
