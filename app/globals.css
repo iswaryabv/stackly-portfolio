@@ -394,10 +394,37 @@ input[type="password"]::-ms-reveal {
       height: auto;
       min-height: 100svh;
       max-height: none;
+      -webkit-text-size-adjust: 100%;
     }
     .auth-form-card {
       height: auto;
       min-height: 680px;
+    }
+  }
+
+  /* iOS Safari: enforce same narrow/zoom behavior as Android */
+  @media (max-width: 360px) {
+    .login-email-input,
+    .signup-confirm-input {
+      font-size: 12px !important;
+      -webkit-text-size-adjust: 100%;
+      white-space: nowrap;
+    }
+    .login-email-input::placeholder {
+      font-size: 7.5px !important;
+      letter-spacing: -0.06em !important;
+    }
+    .signup-confirm-input::placeholder {
+      font-size: 8px !important;
+      letter-spacing: -0.08em !important;
+    }
+    .login-email-icon {
+      margin-right: 0.25rem !important;
+      font-size: 0.85rem !important;
+    }
+    .signup-confirm-icon {
+      margin-right: 0.75rem !important;
+      font-size: 0.85rem !important;
     }
   }
 }

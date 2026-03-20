@@ -388,10 +388,36 @@
           height: auto;
           min-height: 100svh;
           max-height: none;
+          -webkit-text-size-adjust: 100%;
         }
         .auth-form-card {
           height: auto;
           min-height: 680px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        #loginPage .login-email-input,
+        #signupPage .signup-confirm-input {
+          font-size: 12px !important;
+          -webkit-text-size-adjust: 100%;
+          white-space: nowrap;
+        }
+        #loginPage .login-email-input::placeholder {
+          font-size: 7.5px !important;
+          letter-spacing: -0.06em !important;
+        }
+        #signupPage .signup-confirm-input::placeholder {
+          font-size: 8px !important;
+          letter-spacing: -0.08em !important;
+        }
+        #loginPage .login-email-icon {
+          margin-right: 0.25rem !important;
+          font-size: 0.85rem !important;
+        }
+        #signupPage .signup-confirm-icon {
+          margin-right: 0.75rem !important;
+          font-size: 0.85rem !important;
         }
       }
     }
