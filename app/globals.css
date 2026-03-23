@@ -90,41 +90,31 @@ input[type="password"]::-ms-reveal {
   }
 }
 
-/*
- * Login — Remember me / Forgot Password: always a clean horizontal row under the password field,
- * full width, left / right aligned (no vertical stack that looked “centered” on mobile).
- */
-.login-page .login-remember-forgot {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, auto);
-  align-items: center;
-  justify-items: stretch;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  column-gap: clamp(0.375rem, 2.5vw, 1rem);
-  row-gap: 0.25rem;
+/* Login mobile/tablet: keep flow top-to-bottom (Remember me directly under password) */
+@media (max-width: 1023px) {
+  .login-page .login-card-inner {
+    justify-content: flex-start;
+  }
+  .login-page .login-remember-forgot {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    align-self: stretch;
+  }
+  .login-page .login-remember-forgot .forgot-password-link {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
 
-.login-page .login-remember-forgot label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 0;
-  justify-self: start;
-  text-align: left;
-}
-
-.login-page .login-remember-forgot .forgot-password-link {
-  justify-self: end;
-  text-align: right;
-  align-self: center;
-  min-width: 0;
-  max-width: 100%;
-  font-size: clamp(10px, 2.85vw, 13px);
-  line-height: 1.25;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+/* Mobile + zoom: prevent Remember me / Forgot Password overlap - stack on narrow */
+@media (max-width: 480px) {
+  .login-remember-forgot {
+    flex-direction: column;
+    align-items: flex-start !important;
+    align-content: flex-start;
+    gap: 0.5rem;
+  }
 }
 
 /* Error text - sufficient contrast on dark blue background */
@@ -568,12 +558,17 @@ input[type="password"]::-ms-reveal {
   .auth-card-content > * {
     margin-bottom: 0.5rem;
   }
+  .login-remember-forgot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
   .font-welcome-heading {
     letter-spacing: 0.2em;
   }
 }
 
-/* iOS Safari: match normal mobile layout and avoid overlaps (including 150% zoom) */
+/* iOS Safari: spacing tuned without shifting Remember row away from password */
 @supports (-webkit-touch-callout: none) {
   @media (max-width: 500px) {
     .login-page .login-card-inner {
@@ -582,9 +577,6 @@ input[type="password"]::-ms-reveal {
     }
     .login-page .login-card-inner h1 {
       margin-bottom: 0.5rem;
-    }
-    .login-page .login-remember-forgot {
-      margin-top: 0.75rem;
     }
     .login-page button[type="submit"] {
       margin-top: 0.75rem;

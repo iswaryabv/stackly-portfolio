@@ -131,7 +131,7 @@ export default function LoginPage() {
             <div className="pointer-events-none absolute inset-0 rounded-[10px] shadow-[inset_20px_0_45px_rgba(0,0,0,0.55),inset_-20px_0_45px_rgba(0,0,0,0.55)]" />
             <div className="pointer-events-none absolute inset-0 rounded-[10px] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.25)]" />
 
-            <div className="relative z-10 flex flex-col flex-1 min-h-0 min-w-0 auth-card-content login-card-inner px-4 sm:px-6 pt-4 sm:pt-8 pb-2 sm:pb-6 lg:pt-14 lg:pb-10 text-white text-left justify-between sm:justify-center">
+            <div className="relative z-10 flex flex-col flex-1 min-h-0 min-w-0 auth-card-content login-card-inner px-4 sm:px-6 pt-4 sm:pt-8 pb-2 sm:pb-6 lg:pt-14 lg:pb-10 text-white text-left max-lg:justify-start lg:justify-between">
               <div className="min-h-0">
                 <div className="w-full flex justify-center flex-shrink-0 min-w-0">
                   <h1 className="font-welcome-heading text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-5 sm:mb-4 lg:mb-7 break-words tracking-widest">
@@ -149,8 +149,8 @@ export default function LoginPage() {
                   </div>
                 </div>
 
-                <form onSubmit={handleLogin} noValidate>
-                  <div className="space-y-6 sm:space-y-4 lg:space-y-6 flex-shrink-0">
+                <form onSubmit={handleLogin} noValidate className="flex flex-col min-w-0 w-full">
+                  <div className="space-y-6 sm:space-y-4 lg:space-y-6 flex-shrink-0 w-full min-w-0">
                   <div className="flex flex-col">
                     <div className="flex items-center border-b border-white/60 pb-2 min-w-0">
                       <FaEnvelope className="login-email-icon mr-2 sm:mr-4 text-sm opacity-80 flex-shrink-0" />
@@ -244,28 +244,24 @@ export default function LoginPage() {
                       </p>
                     )}
                   </div>
-                </div>
 
-                <div
-                  className="login-remember-forgot mt-5 sm:mt-4 text-xs opacity-90 flex-shrink-0 min-w-0 w-full max-w-full"
-                  role="group"
-                  aria-label="Login options"
-                >
-                  <label className="cursor-pointer min-w-0">
+                <div className="login-remember-forgot flex flex-wrap items-stretch sm:items-center justify-between gap-x-3 gap-y-2 text-xs opacity-90 flex-shrink-0 min-w-0 w-full max-w-full">
+                  <label className="flex items-center gap-2 cursor-pointer flex-shrink-0 min-w-0 max-w-full">
                     <input
                       type="checkbox"
                       checked={form.rememberMe}
                       onChange={handleChange("rememberMe")}
-                      className="h-3.5 w-3.5 rounded border border-white/60 bg-transparent accent-[#2d8cf0]"
+                      className="h-3.5 w-3.5 shrink-0 rounded border border-white/60 bg-transparent accent-[#2d8cf0]"
                     />
-                    <span>Remember me</span>
+                    <span className="break-words">Remember me</span>
                   </label>
                   <Link
                     href="/forgot-password"
-                    className="forgot-password-link text-white no-underline hover:text-white hover:underline decoration-1 underline-offset-4 min-w-0"
+                    className="forgot-password-link text-white no-underline hover:text-white hover:underline decoration-1 underline-offset-4 text-[13px] flex-shrink-0 min-w-0 max-w-full break-words"
                   >
                     Forgot Password?
                   </Link>
+                </div>
                 </div>
 
                 {errors.form && (
