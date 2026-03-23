@@ -108,61 +108,33 @@
       text-underline-offset: 3px;
     }
 
-    /* Remember me + Forgot password — flex-wrap; narrow container = full-width link (no clip at zoom) */
+    /* Remember me + Forgot password: one row, left/right — stable at mobile zoom */
     #loginPage .login-remember-forgot {
-      container-type: inline-size;
-      container-name: login-remember;
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
       align-items: center;
-      gap: 0.5rem clamp(0.5rem, 2.5vw, 0.875rem);
+      column-gap: clamp(0.5rem, 2.5vw, 0.875rem);
+      row-gap: 0.5rem;
       width: 100%;
       max-width: 100%;
       box-sizing: border-box;
-      overflow: visible;
-      min-width: 0;
     }
     #loginPage .login-remember-forgot > label {
-      flex: 0 1 auto;
+      justify-self: start;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       min-width: 0;
-      max-width: 100%;
     }
     #loginPage .login-remember-forgot .forgot-password-link {
-      flex: 1 1 auto;
-      min-width: min(100%, 12rem);
-      max-width: 100%;
-      margin-left: auto;
+      justify-self: end;
       text-align: right;
-      align-self: center;
-      overflow: visible;
-      white-space: normal;
+      min-width: 0;
+      max-width: 100%;
       overflow-wrap: anywhere;
       word-break: break-word;
-      line-height: 1.4;
-      font-size: clamp(8px, 3.6vw, 13px);
-      hyphens: auto;
-      -webkit-hyphens: auto;
-    }
-    @container login-remember (max-width: 320px) {
-      #loginPage .login-remember-forgot .forgot-password-link {
-        flex-basis: 100%;
-        margin-left: 0 !important;
-        text-align: left;
-        align-self: stretch;
-        min-width: 0;
-      }
-    }
-    @media (max-width: 320px) {
-      #loginPage .login-remember-forgot .forgot-password-link {
-        flex-basis: 100%;
-        margin-left: 0 !important;
-        text-align: left;
-        align-self: stretch;
-        min-width: 0;
-      }
+      line-height: 1.35;
+      font-size: clamp(10px, 3.4vw, 13px);
     }
 
     .auth-card-content {
@@ -462,10 +434,6 @@
         margin-top: 0;
         margin-bottom: 0;
         overflow: hidden;
-      }
-      #loginPage .login-card.auth-form-card {
-        overflow-x: visible;
-        overflow-y: visible;
       }
       .auth-form-card .auth-card-content,
       .auth-form-card .signup-card-content {
@@ -1390,7 +1358,7 @@
           <div class="relative z-10 flex flex-col flex-1 min-h-0 min-w-0 auth-card-content login-card-inner px-4 sm:px-6 pt-4 sm:pt-8 pb-2 sm:pb-6 lg:pt-14 lg:pb-10 text-white text-left justify-between sm:justify-center">
             <!-- WELCOME (WB_005: centered on narrow screens) -->
             <div class="w-full flex justify-center flex-shrink-0 min-w-0">
-            <h1 class="font-welcome-heading text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-5 sm:mb-4 lg:mb-7 break-words tracking-widest">
+            <h1 class="font-welcome-heading text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-semibold mb-3 sm:mb-4 lg:mb-7 break-words tracking-widest">
               WELCOME
             </h1>
             </div>
@@ -1440,15 +1408,15 @@
             </div>
 
             <!-- REMEMBER / FORGOT -->
-            <div class="login-remember-forgot mt-5 sm:mt-4 text-xs opacity-90 min-w-0 w-full">
-              <label class="flex items-center gap-2 cursor-pointer min-w-0">
+            <div class="login-remember-forgot flex flex-wrap items-center justify-between gap-x-4 gap-y-2 mt-5 sm:mt-4 text-xs opacity-90 min-w-0">
+              <label class="flex items-center gap-2 cursor-pointer flex-shrink-0">
                 <input
                   type="checkbox"
                   class="h-3.5 w-3.5 rounded border border-white/60 bg-transparent accent-[#2d8cf0]"
                 />
                 <span>Remember me</span>
               </label>
-              <a href="#forgot" onclick="location.hash='forgot'; showPage('forgot'); return false;" class="forgot-password-link cursor-pointer min-w-0">
+              <a href="#forgot" onclick="location.hash='forgot'; showPage('forgot'); return false;" class="forgot-password-link cursor-pointer flex-shrink-0 min-w-0">
                 Forgot Password?
               </a>
             </div>
