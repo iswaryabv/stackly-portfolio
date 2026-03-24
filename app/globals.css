@@ -398,8 +398,9 @@ input[type="password"]::-ms-reveal {
   }
 }
 
-/* Desktop/tablet browsers: split leftover vertical space evenly (prevents bigger bottom gap) */
-@media (min-width: 768px) {
+/* Large screens only: vertically center auth when split layout. At 768–1023px this was centering
+ * the card in the viewport and leaving white bands above/below on phones (landscape) and tablets. */
+@media (min-width: 1024px) {
   .auth-page {
     justify-content: center;
   }
@@ -413,7 +414,19 @@ input[type="password"]::-ms-reveal {
 
 /* Mobile: edge-to-edge feel (no extra top/bottom bars); scroll only when content overflows */
 @media (max-width: 1023px) {
+  /* Match card mid-tone so Chrome/Android never shows white between chrome UI and content */
+  html:has(.auth-page),
+  body:has(.auth-page) {
+    background-color: #3f66c9 !important;
+    min-height: 100svh;
+    min-height: 100dvh;
+    min-height: 100lvh;
+  }
+
   .auth-page {
+    /* Kill Tailwind bg-white — gaps/overscroll must not flash white */
+    justify-content: flex-start !important;
+    background-color: transparent !important;
     /* No top/bottom padding here — avoids strips (bg-white) on Android & iOS */
     --auth-safe-top: env(safe-area-inset-top, 0px);
     --auth-safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -454,6 +467,16 @@ input[type="password"]::-ms-reveal {
     min-height: 100dvh;
     align-items: stretch;
   }
+  /* Flatter gradient on small viewports — less dark banding at top/bottom */
+  .login-card.auth-form-card,
+  .signup-card.auth-form-card {
+    background-image: linear-gradient(
+      to bottom,
+      #5f82e8 0%,
+      #3f66c9 52%,
+      #2d5ab8 100%
+    ) !important;
+  }
   .auth-form-card {
     width: 100%;
     max-width: 100% !important;       /* edge-to-edge */
@@ -471,6 +494,10 @@ input[type="password"]::-ms-reveal {
     margin-top: 0;
     margin-bottom: 0;
     overflow: hidden;
+  }
+  /* Edge inset shadows read as extra dark bands on tall phones — soften on mobile */
+  .auth-form-card > .pointer-events-none.absolute.inset-0 {
+    opacity: 0.42;
   }
   .auth-form-card .auth-card-content,
   .auth-form-card .signup-card-content {
