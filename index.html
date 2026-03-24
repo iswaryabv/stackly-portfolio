@@ -496,6 +496,49 @@
       }
     }
 
+    /*
+     * Some phones render with wider CSS viewports (or desktop-site mode), which can bypass
+     * width breakpoints and reintroduce white bands. Force edge-to-edge auth layout on
+     * touch-first devices regardless of reported width.
+     */
+    @media (hover: none) and (pointer: coarse) {
+      .auth-page {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100dvh;
+        min-height: 100dvh;
+        max-height: 100dvh;
+        padding: 0 !important;
+        justify-content: flex-start;
+        align-items: stretch;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+      .auth-page .auth-layout {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        gap: 0 !important;
+        height: 100%;
+        min-height: 100%;
+      }
+      .auth-page .auth-layout > div:first-child {
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+      }
+      .auth-form-card {
+        width: 100%;
+        max-width: 100% !important;
+        height: 100%;
+        min-height: 100%;
+        margin: 0;
+        border-radius: 0;
+      }
+    }
+
     @media (min-width: 1024px) {
       .auth-form-card {
         min-height: 580px;
