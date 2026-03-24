@@ -184,7 +184,7 @@ export default function LoginPage() {
                   </h1>
                 </div>
 
-                <div className="flex justify-center mb-8 sm:mb-4 lg:mb-8 flex-shrink-0">
+                <div className="flex justify-center mb-4 sm:mb-4 lg:mb-8 flex-shrink-0">
                   <div className="bg-white w-[120px] h-[44px] sm:w-[160px] sm:h-[60px] lg:w-[200px] lg:h-[80px] rounded-[50%] flex items-center justify-center shadow-lg overflow-hidden">
                     <img
                       src="/stackly-logo.webp"
