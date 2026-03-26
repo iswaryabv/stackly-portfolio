@@ -25,6 +25,7 @@ const plans = [
     name: "Basic",
     oldPrice: "$80",
     newPrice: "$40",
+    saveText: "Save 50%",
     features: [
       "Free domain for 1 year",
       "20 GB storage space",
@@ -37,6 +38,7 @@ const plans = [
     name: "Business Plan",
     oldPrice: "$300",
     newPrice: "$150",
+    saveText: "Save 50%",
     isRecommended: true,
     features: [
       "Free domain for 1 year",
@@ -53,6 +55,7 @@ const plans = [
     name: "Advanced",
     oldPrice: "$400",
     newPrice: "$180",
+    saveText: "Save 30%",
     features: [
       "Free domain for 1 year",
       "300 GB storage space",
@@ -394,12 +397,18 @@ export default function PlanningPage() {
                       </div>
                     </div>
 
-                    <div className="mb-3 flex items-end justify-between">
-                      <div className="text-sm opacity-70 line-through">{plan.oldPrice}</div>
+                    <div className="mb-2 flex items-end justify-between">
+                      <div className="flex items-end gap-2">
+                        <div className="text-sm font-bold text-[#1f3861] line-through transition-colors group-hover:text-white">{plan.oldPrice}</div>
+                        <div className="text-[10px] font-semibold text-[#5e80b5] transition-colors group-hover:text-white">
+                          {plan.saveText}
+                        </div>
+                      </div>
                       <div className="rounded border border-[#bed2f3] bg-[#f4f8ff] px-2 py-1 text-lg font-bold text-[#0f3e87] group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">
                         {plan.newPrice}
                       </div>
                     </div>
+                    <div className="mb-3 h-px w-full bg-[#dbe3ef] group-hover:bg-white/30" />
 
                     <ul className="space-y-2 text-xs leading-relaxed sm:text-sm">
                       {plan.features.map((feature) => (
