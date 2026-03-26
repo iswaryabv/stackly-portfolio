@@ -384,8 +384,7 @@
 
     /* Mobile: no extra top/bottom bands; safe-area lives inside card */
     @media (max-width: 1023px) {
-      html,
-      body {
+      body.auth-visible {
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
@@ -490,8 +489,7 @@
      * touch-first devices regardless of reported width.
      */
     @media (hover: none) and (pointer: coarse) {
-      html,
-      body {
+      body.auth-visible {
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
@@ -798,6 +796,7 @@
       var active = document.getElementById(page + "Page");
       if (active) active.classList.remove("hidden");
       var isAuth = (page === "login" || page === "signup");
+      document.body.classList.toggle("auth-visible", isAuth);
       // Keep page scroll available on desktop zoom (150-200%) to avoid clipped auth content.
       document.body.style.overflow = "";
       updateMobilePlaceholders();
