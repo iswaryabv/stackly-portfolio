@@ -1059,6 +1059,7 @@
       else if (hash === "error") showPage("error");
       else showPage("login");
       setupAuthPullToRefresh();
+      updateVerifyOtpButtons();
     });
 
     window.addEventListener("hashchange", function () {
@@ -1148,6 +1149,30 @@
       if (/[a-zA-Z0-9]/.test(input.value)) wrap.classList.remove("password-toggle-hidden"); else wrap.classList.add("password-toggle-hidden");
     }
 
+    function updateVerifyOtpButtons() {
+      var emailComplete = true;
+      for (var i = 0; i < 4; i++) {
+        var inp = document.getElementById("emailOtp" + i);
+        if (!inp || !inp.value.trim()) {
+          emailComplete = false;
+          break;
+        }
+      }
+      var emailBtn = document.getElementById("verifyEmailConfirmBtn");
+      if (emailBtn) emailBtn.disabled = !emailComplete;
+
+      var mobileComplete = true;
+      for (var j = 0; j < 4; j++) {
+        var minp = document.getElementById("mobileOtp" + j);
+        if (!minp || !minp.value.trim()) {
+          mobileComplete = false;
+          break;
+        }
+      }
+      var mobileBtn = document.getElementById("verifyMobileConfirmBtn");
+      if (mobileBtn) mobileBtn.disabled = !mobileComplete;
+    }
+
     function handleOtpInput(group, index, event) {
       var input = event.target;
       input.value = input.value.replace(/[^0-9]/g, "").slice(0, 1);
@@ -1155,6 +1180,7 @@
         var next = document.getElementById(group + "Otp" + (index + 1));
         if (next) next.focus();
       }
+      updateVerifyOtpButtons();
     }
 
     function resendCode(type) {
@@ -1168,8 +1194,8 @@
       }
     }
 
-    function confirmEmailOtp() {
-      event.preventDefault();
+    function confirmEmailOtp(event) {
+      if (event && event.preventDefault) event.preventDefault();
       var errEl = document.getElementById("verifyEmailOtpError");
       var btn = document.getElementById("verifyEmailConfirmBtn");
       if (errEl) errEl.innerText = "";
@@ -1212,8 +1238,8 @@
       });
     }
 
-    function confirmMobileOtp() {
-      event.preventDefault();
+    function confirmMobileOtp(event) {
+      if (event && event.preventDefault) event.preventDefault();
       var errEl = document.getElementById("verifyMobileOtpError");
       var btn = document.getElementById("verifyMobileConfirmBtn");
       if (errEl) errEl.innerText = "";
@@ -1867,7 +1893,7 @@
           Registered email <span id="verifyEmailContact">email@example.com</span>
         </p>
 
-        <form onsubmit="confirmEmailOtp(); return false;" class="space-y-6">
+        <form onsubmit="confirmEmailOtp(event); return false;" class="space-y-6">
           <div class="flex justify-center gap-3 sm:gap-4">
             <input id="emailOtp0" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('email',0,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
             <input id="emailOtp1" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('email',1,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
@@ -1913,7 +1939,7 @@
           Registered mobile number <span id="verifyMobileContact">+91-XXXXXXXXXX</span>
         </p>
 
-        <form onsubmit="confirmMobileOtp(); return false;" class="space-y-6">
+        <form onsubmit="confirmMobileOtp(event); return false;" class="space-y-6">
           <div class="flex justify-center gap-3 sm:gap-4">
             <input id="mobileOtp0" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('mobile',0,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
             <input id="mobileOtp1" type="text" maxlength="1" inputmode="numeric" oninput="handleOtpInput('mobile',1,event)" class="w-10 h-10 sm:w-12 sm:h-12 rounded border bg-transparent text-center text-lg text-white outline-none focus:border-white/80" style="border: 1px solid rgba(255,255,255,0.7);" />
