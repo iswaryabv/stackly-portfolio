@@ -109,6 +109,19 @@
       transition: transform 0.2s ease;
     }
 
+    /* Desktop zoom fallback (roughly 150-200%): show hamburger + compact menu for planning header */
+    @media (hover: hover) and (pointer: fine) and (max-width: 1024px) and (min-resolution: 1.5dppx) and (max-resolution: 2.1dppx) {
+      .planning-zoom-show-hamburger {
+        display: inline-flex !important;
+      }
+      .planning-zoom-hide-primary-nav {
+        display: none !important;
+      }
+      .planning-zoom-show-mobile-menu {
+        display: block !important;
+      }
+    }
+
     @media (max-width: 400px) {
       .font-welcome-heading {
         text-align: center;
@@ -1501,7 +1514,7 @@
             type="button"
             id="planningMobileMenuBtn"
             onclick="togglePlanningMobileMenu(event)"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/25 text-white md:hidden"
+            class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/25 text-white md:hidden planning-zoom-show-hamburger"
             aria-label="Toggle navigation menu"
             aria-expanded="false"
           >
@@ -1513,9 +1526,9 @@
           <div class="flex h-8 min-w-[92px] items-center justify-center overflow-hidden rounded-[50%] bg-white px-3 sm:h-9 sm:min-w-[104px]">
             <img src="./public/stackly-logo.webp" alt="Stackly logo" class="h-[18px] w-auto sm:h-[20px]" />
           </div>
-        </div>
+      </div>
 
-        <div class="hidden min-w-0 flex-1 md:flex md:items-center">
+        <div class="hidden min-w-0 flex-1 md:flex md:items-center planning-zoom-hide-primary-nav">
           <nav class="flex w-full min-w-0 flex-wrap items-center justify-evenly gap-x-2 gap-y-2 text-[13px] text-white sm:text-sm sm:gap-x-3" aria-label="Main">
             <button type="button" id="planningNav-workspace" class="planning-nav-btn shrink-0" onclick="planningNavClick('workspace')">Workspace</button>
             <button type="button" id="planningNav-myWebsites" class="planning-nav-btn shrink-0" onclick="planningNavClick('myWebsites')">My Websites</button>
@@ -1566,7 +1579,7 @@
           </div>
         </div>
       </div>
-      <div id="planningMobileMenu" class="hidden border-t border-white/20 px-3 pb-3 pt-2 md:hidden">
+      <div id="planningMobileMenu" class="hidden border-t border-white/20 px-3 pb-3 pt-2 md:hidden planning-zoom-show-mobile-menu">
         <div class="grid grid-cols-2 gap-2">
           <button type="button" onclick="planningNavClick('workspace')" class="rounded-md border border-white/25 px-2 py-2 text-left text-xs text-white" id="planningMobile-workspace">Workspace</button>
           <button type="button" onclick="planningNavClick('myWebsites')" class="rounded-md border border-white/25 px-2 py-2 text-left text-xs text-white" id="planningMobile-myWebsites">My Websites</button>

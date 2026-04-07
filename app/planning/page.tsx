@@ -117,7 +117,7 @@ export default function PlanningPage() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen((v) => !v)}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/25 text-white md:hidden"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/25 text-white md:hidden planning-zoom-show-hamburger"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -135,7 +135,7 @@ export default function PlanningPage() {
             </div>
           </div>
 
-          <div className="hidden min-w-0 flex-1 md:flex md:items-center">
+          <div className="hidden min-w-0 flex-1 md:flex md:items-center planning-zoom-hide-primary-nav">
             <nav
               className="flex w-full min-w-0 flex-wrap items-center justify-evenly gap-x-2 gap-y-2 text-[13px] text-white sm:text-sm sm:gap-x-3"
               aria-label="Main"
@@ -279,7 +279,7 @@ export default function PlanningPage() {
           </div>
         </div>
         {mobileMenuOpen && (
-          <div className="border-t border-white/20 px-3 pb-3 pt-2 md:hidden">
+          <div className="border-t border-white/20 px-3 pb-3 pt-2 md:hidden planning-zoom-show-mobile-menu">
             <div className="grid grid-cols-2 gap-2">
               {NAV_ITEMS.map((item) => (
                 <button

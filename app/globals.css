@@ -41,6 +41,19 @@ body:has(> main.planning-page) {
   background-color: #efefef;
 }
 
+/* Desktop zoom fallback (roughly 150-200%): show hamburger + compact menu for planning header */
+@media (hover: hover) and (pointer: fine) and (max-width: 1024px) and (min-resolution: 1.5dppx) and (max-resolution: 2.1dppx) {
+  .planning-zoom-show-hamburger {
+    display: inline-flex !important;
+  }
+  .planning-zoom-hide-primary-nav {
+    display: none !important;
+  }
+  .planning-zoom-show-mobile-menu {
+    display: block !important;
+  }
+}
+
 /*
  * iOS Safari: make 100% / min-height chain resolve to the *visible* viewport.
  * Without this, auth pages can render too short, leave gaps, or flex children collapse.
