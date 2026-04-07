@@ -439,7 +439,7 @@ export default function PlanningPage() {
                           {plan.saveText}
                         </div>
                       </div>
-                      <div className="shrink-0 rounded border border-[#94b4e0] bg-[#e8f0fc] px-2 py-0.5 text-base font-bold text-[#082a5c] transition-colors group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">
+                      <div className="relative -top-2 mr-3 shrink-0 rounded border border-[#94b4e0] bg-[#e8f0fc] px-3.5 py-1.5 text-xl font-bold leading-none text-[#082a5c] transition-colors group-hover:border-white/30 group-hover:bg-white group-hover:text-[#0f3e87]">
                         {plan.newPrice}
                       </div>
                     </div>
