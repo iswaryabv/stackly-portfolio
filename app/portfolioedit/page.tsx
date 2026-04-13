@@ -586,7 +586,7 @@ const [showPosition, setShowPosition] = useState(true);
 
               {/* Border Radius again */}
               <div>
-                <p className="text-sm text-gray-300 mb-2">Border Radius</p>
+                <p className="text-sm text-gray-300 mb-2">Opacity</p>
                 <div className="flex items-center gap-2">
                   <input
                     type="range"

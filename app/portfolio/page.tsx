@@ -13,16 +13,22 @@ import {
   FaPen,
 } from "react-icons/fa";
 
+const NAV_ITEMS = [
+  { id: "home" as const, label: "Home" },
+  { id: "about" as const, label: "About Us" },
+  { id: "products" as const, label: "Our Products" },
+  { id: "categories" as const, label: "Categories" },
+  { id: "contact" as const, label: "Contact" },
+];
+
+type NavId = (typeof NAV_ITEMS)[number]["id"];
+
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [innerMobileMenuOpen, setInnerMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const [activeNav, setActiveNav] = useState("Home");
-
-  function toggleCart() {
-    setCartCount((prev) => prev + 1);
-  }
+  const [activeNav, setActiveNav] = useState<NavId>("home");
 
   function enableEditMode() {
     alert("Edit mode enabled!");
@@ -33,184 +39,230 @@ export default function HomePage() {
   }
 
   return (
-    
-      <main className="min-h-screen bg-[#FFF1F2]">
-      
+    <main className="min-h-screen bg-[#FFF1F2]">
       {/* ✅ NAVBAR */}
-      <nav className="sticky top-0 z-50 bg-[#06224C] px-4 md:px-8 py-3 flex items-center justify-between shadow-sm">
-        
-        {/* LEFT */}
-        <div className="flex items-center gap-4">
-          
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-white"
-          >
-            <FaBars />
-          </button>
+      <nav className="w-full bg-[#06224C]">
+        <div className="flex w-full flex-wrap items-center gap-2 px-3 py-3 sm:gap-3 sm:px-8 xl:flex-nowrap">
+          <div className="flex min-w-0 flex-shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/25 text-white lg:hidden"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
 
-          <Link
-            href="/"
-            className="bg-white px-5 py-3 rounded-[60%] shadow-md">
-          
-            <img
-              src="/stackly-logo.webp"
-              alt="logo"
-              className="h-5"
-            />
-          </Link>
+            <Link
+              href="/"
+              className="flex h-8 min-w-[92px] items-center justify-center overflow-hidden rounded-[50%] bg-white px-3 sm:h-9 sm:min-w-[104px]"
+            >
+              <img
+                src="/stackly-logo.webp"
+                alt="Stackly logo"
+                className="h-[18px] w-auto sm:h-[20px]"
+              />
+            </Link>
+          </div>
 
-          <div className="hidden lg:flex gap-8 text-white text-sm font-bold">
-            <Link href="/">Home</Link>
-            <Link href="/about">About Us</Link>
-            <Link href="/products"> Our Products</Link>
-             <Link href="/products"> Categories</Link>
-            <Link href="/contact">Contact</Link>
+          <div className="hidden min-w-0 flex-1 lg:flex lg:items-center">
+            <nav
+              className="flex w-full min-w-0 flex-wrap items-center justify-evenly gap-x-2 gap-y-2 text-[13px] text-white sm:text-sm sm:gap-x-3"
+              aria-label="Main"
+            >
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveNav(item.id)}
+                  className={`shrink-0 border-b-2 pb-0.5 transition-colors ${
+                    activeNav === item.id
+                      ? "border-[#f0e6d4] font-medium text-white"
+                      : "border-transparent hover:text-white"
+                  }`}
+                  aria-current={activeNav === item.id ? "page" : undefined}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="ml-auto flex min-w-0 flex-nowrap items-center gap-3 sm:gap-4 md:gap-5">
+            {/* CART */}
+            <button
+              onClick={() => setCartCount((prev) => prev + 1)}
+              className="relative flex items-center gap-2 border border-white/30 px-3 py-1 rounded-full text-white text-xs shrink-0"
+              aria-label="Shopping cart"
+            >
+              <FaShoppingCart />
+              <span className="hidden sm:inline">Cart</span>
+
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+
+            {/* SEARCH */}
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="w-8 h-8 flex items-center justify-center bg-white rounded-full shrink-0"
+              aria-label="Search"
+            >
+              <FaSearch className="text-[#06224C]" />
+            </button>
+
+            {/* PROFILE */}
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30 shrink-0">
+              <img
+                src="https://ui-avatars.com/api/?name=User"
+                alt="User profile"
+              />
+            </div>
           </div>
         </div>
 
-        {/* RIGHT */}
-        <div className="flex items-center gap-4">
-          
-          {/* CART */}
-          <button
-            onClick={toggleCart}
-            className="relative flex items-center gap-2 border border-white/30 px-3 py-1 rounded-full text-white text-xs"
-          >
-            <FaShoppingCart />
-            <span className="hidden sm:inline">Cart</span>
-
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-                {cartCount}
-              </span>
-            )}
-          </button>
-
-          {/* SEARCH */}
-          <button
-            onClick={() => setSearchOpen(!searchOpen)}
-            className="w-8 h-8 flex items-center justify-center bg-white rounded-full"
-          >
-            <FaSearch className="text-[#06224C]" />
-          </button>
-
-          {/* PROFILE */}
-          <div className="w-8 h-8 rounded-full overflow-hidden border">
-            <img
-              src="https://ui-avatars.com/api/?name=User"
-              alt="user"
-            />
+        {mobileMenuOpen && (
+          <div className="border-t border-white/20 px-3 pb-3 pt-2 lg:hidden">
+            <div className="grid grid-cols-2 gap-2">
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => {
+                    setActiveNav(item.id);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`rounded-md border px-3 py-2 text-xs transition ${
+                    activeNav === item.id
+                      ? "border-[#f0e6d4] bg-white/10 text-white"
+                      : "border-white/25 text-white hover:bg-white/10"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </nav>
 
-      {/* ✅ MOBILE MENU */}
-      {/* {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#06224C] text-white p-4 space-y-3">
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/products">Products</Link>
-          <Link href="/contact">Contact</Link>
-        </div>
-      )} */}
-      {mobileMenuOpen && (
-  <div className="lg:hidden border-t border-white/20 px-4 pb-3 pt-2 bg-[#06224C]">
-    <div className="grid grid-cols-2 gap-2">
-
-{[
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Products", path: "/products" },
-  { name: "Categories", path: "/categories" },
-  { name: "Contact", path: "/contact" },
-].map((item, i) => (
-  <Link
-    key={i}
-    href={item.path}
-    onClick={() => {
-      setActiveNav(item.name);
-      setMobileMenuOpen(false);
-    }}
-    className={`rounded-md border px-3 py-2 text-xs transition ${
-      activeNav === item.name
-        ? "border-[#f0e6d4] bg-white/10 text-white"
-        : "border-white/25 text-white hover:bg-white/10"
-    }`}
-  >
-    {item.name}
-  </Link>
-))}
-
-    </div>
-  </div>
-)}
-
-      {/* ✅ SEARCH BAR */}
-      {searchOpen && (
-        <div className="bg-white p-6 border-b">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full border p-3 rounded-lg"
-          />
-        </div>
-      )}
       {/* MAIN CONTENT */}
       <div className="flex-1 bg-white p-4 md:p-7 flex justify-center">
-       <div className="w-full max-w-[1200px] relative">
+        <div className="w-full max-w-[1200px] relative">
 
-  {/* ✅ Canvas Box */}
-  <div className="w-full min-h-[530px] bg-[#FFF1F2] rounded-xl border-2 border-gray-300 flex flex-col relative overflow-hidden">
+          {/* ✅ Canvas Box */}
+          <div className="w-full min-h-[530px] bg-[#FFF1F2] rounded-xl border-2 border-gray-300 flex flex-col relative overflow-hidden">
 
-    {/* ✅ INNER NAVBAR */}
-    <div className="flex items-center justify-between px-4 md:px-10 py-5 border-b border-gray-300 bg-[#06224C] rounded-t-xl">
+            {/* ✅ INNER NAVBAR */}
+            <div className="flex w-full flex-wrap items-center gap-4 px-3 py-3 sm:gap-6 sm:px-8 xl:flex-nowrap border-b border-gray-300 bg-[#06224C] rounded-t-xl">
+              {/* Mobile: Portfolio heading and logo on left */}
+              <div className="flex items-center gap-2 lg:hidden">
+                <Link
+                  href="/"
+                  className="flex h-8 min-w-[92px] items-center justify-center overflow-hidden rounded-[50%] bg-white px-3 sm:h-9 sm:min-w-[104px]"
+                >
+                  <img
+                    src="/stackly-logo.webp"
+                    alt="Stackly logo"
+                    className="h-[18px] w-auto sm:h-[20px]"
+                  />
+                </Link>
+                  <span className="absolute left-1/2 -translate-x-1/2 text-lg font-semibold text-white">
+    Portfolio
+  </span>
+              </div>
 
-      {/* LEFT */}
-      <div className="flex items-center gap-3">
-        <button
-          onClick={() => setInnerMobileMenuOpen(!innerMobileMenuOpen)}
-          className="lg:hidden text-white"
-        >
-          <FaBars />
-        </button>
+              {/* Desktop: Logo, heading, and nav */}
+              <div className="hidden lg:flex w-full items-center gap-6">
+                <Link
+                  href="/"
+                  className="flex h-8 min-w-[92px] items-center justify-center overflow-hidden rounded-[50%] bg-white px-3 sm:h-9 sm:min-w-[104px]"
+                >
+                  <img
+                    src="/stackly-logo.webp"
+                    alt="Stackly logo"
+                    className="h-[18px] w-auto sm:h-[20px]"
+                  />
+                </Link>
 
-        <div className="text-lg font-semibold text-white">
-          Portfolio
-        </div>
-      </div>
+                <div className="flex flex-1 items-center justify-evenly gap-x-6">
+                  <span className="text-lg font-semibold text-white">Portfolio</span>
 
-      {/* DESKTOP LINKS */}
-      <div className="hidden lg:flex items-center gap-6 text-white">
-        <span>Home</span>
-        <span>About Us</span>
-        <span>Projects</span>
-        <span>Contacts</span>
-      </div>
-    </div>
+                  <button
+                    type="button"
+                    className="shrink-0 border-b-2 border-transparent pb-0.5 transition-colors hover:text-white text-[13px] text-white sm:text-sm"
+                  >
+                    Home
+                  </button>
 
-    {/* ✅ INNER MOBILE MENU */}
-    {innerMobileMenuOpen && (
-      <div className="lg:hidden border-t border-white/20 px-4 pb-3 pt-2 bg-[#06224C]">
-        <div className="grid grid-cols-2 gap-2">
-          {["Home", "About Us", "Projects", "Contacts"].map((item, i) => (
-            <button
-              key={i}
-              onClick={() => setInnerMobileMenuOpen(false)}
-              className="rounded-md border border-white/25 px-3 py-2 text-xs text-white hover:bg-white/10"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-      </div>
-    )}
+                  <button
+                    type="button"
+                    className="shrink-0 border-b-2 border-transparent pb-0.5 transition-colors hover:text-white text-[13px] text-white sm:text-sm"
+                  >
+                    About Us
+                  </button>
+
+                  <button
+                    type="button"
+                    className="shrink-0 border-b-2 border-transparent pb-0.5 transition-colors hover:text-white text-[13px] text-white sm:text-sm"
+                  >
+                    Projects
+                  </button>
+
+                  <button
+                    type="button"
+                    className="shrink-0 border-b-2 border-transparent pb-0.5 transition-colors hover:text-white text-[13px] text-white sm:text-sm"
+                  >
+                    Contacts
+                  </button>
+                </div>
+              </div>
+
+              {/* Mobile: Hamburger menu on right */}
+              <div className="lg:hidden ml-auto">
+                <button
+                  type="button"
+                  onClick={() => setInnerMobileMenuOpen((v) => !v)}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/25 text-white"
+                  aria-label="Toggle portfolio menu"
+                  aria-expanded={innerMobileMenuOpen}
+                >
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* ✅ INNER MOBILE MENU */}
+            {innerMobileMenuOpen && (
+              <div className="border-t border-white/20 px-3 pb-3 pt-2 lg:hidden bg-[#06224C]">
+                <div className="grid grid-cols-2 gap-2">
+                  {["Home", "About Us", "Projects", "Contacts"].map((item, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setInnerMobileMenuOpen(false)}
+                      className="rounded-md border border-white/25 px-3 py-2 text-xs text-white hover:bg-white/10 transition"
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* HERO */}
             <div className="flex-1 flex flex-col px-4 md:px-8 lg:px-12 pt-6 md:pt-10 relative z-10">
               <h1 className="text-4xl font-bold text-gray-800 leading-tight">
                 <div className="mb-2">Hello, I'm</div>
-                <div className="text-blue-600 mb-2">Srinivas Pentakota</div>
+                <div className="text-[#477892] mb-2">Srinivas Pentakota</div>
                 <div>UI/UX Designer</div>
               </h1>
 
@@ -224,6 +276,7 @@ export default function HomePage() {
                   <div className="w-[300px] h-[300px] bg-gradient-to-r from-purple-500 via-blue-400 to-cyan-300 opacity-20 blur-2xl rounded-full absolute"></div>
                   <div className="w-[200px] h-[150px] bg-cyan-300 opacity-20 blur-2xl rounded-full absolute left-4 top-4"></div>
                   <div className="w-[100px] h-[100px] bg-pink-400 opacity-20 rounded-full absolute right-4 bottom-4"></div>
+                  <div className="w-[180px] h-[130px] bg-cyan-300 opacity-20 blur-2xl rounded-[60%_40%_55%_45%] absolute -top-6 -left-6"></div>
                   <div className="w-[140px] h-[230px] bg-white/70 rounded-[80px] rotate-[-30deg] shadow-md absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
                   <div className="w-[165px] h-[245px] rounded-full overflow-hidden border-4 border-white z-20 relative">
                     <img src="/portfolio.png" className="w-full h-full object-cover" />
@@ -231,15 +284,26 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="flex gap-6 mt-5">
-                <button className="px-6 py-2 bg-blue-800 text-white rounded-lg hover:bg-gray-700">
+              {/* <div className="flex gap-6 mt-5">
+                <button className="px-3 py-2 ml-12 w-40  bg-gradient-to-r from-[#06224C] to-[#1A5BBC] text-white rounded-lg hover:bg-gray-700">
                   Edit
                 </button>
 
-                <button className="px-6 py-2 border border-gray-800 text-blue-800 rounded-lg hover:bg-gray-700">
+                <button className="px-3 py-2 border border-[#06224C] text-[#06224C] rounded-lg hover:bg-gray-700 hover:text-white">
                   View My Works
                 </button>
-              </div>
+              </div> */}
+             <div className="flex gap-3 mt-5 justify-center md:justify-start">
+  
+  <button className="px-3 py-2 w-28 md:ml-10 bg-gradient-to-r from-[#06224C] to-[#1A5BBC] text-white rounded-lg hover:bg-gray-700 text-sm">
+    Edit
+  </button>
+
+  <button className="px-3 py-2 w-36 border border-[#06224C] text-[#06224C] rounded-lg hover:bg-gray-700 hover:text-white text-sm whitespace-nowrap">
+    View My Works
+  </button>
+
+</div>
 
               {/* STATS */}
               <div className="flex flex-col items-center gap-4 mt-8 mb-6 w-full md:flex-row md:justify-between md:gap-0 lg:flex-row lg:justify-between lg:gap-0">
